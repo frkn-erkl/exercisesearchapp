@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ExerciseListProvider with ChangeNotifier {
-    List<Map<dynamic, dynamic>> items = [];
+    List<Map<dynamic, dynamic>>? items;
   List<Map<dynamic, dynamic>> filteredItems = [];
   
-  String? exerciseTypeParameter;
-  String? muscleTypeParameter;
 
-
-   List<Map<dynamic, dynamic>> get getItems {
+   List<Map<dynamic, dynamic>>? get getItems {
     return items;
   }
 

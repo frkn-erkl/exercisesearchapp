@@ -13,7 +13,7 @@ class DrawerPanel extends StatefulWidget {
 
 class DrawerPanelState extends State<DrawerPanel> {
   List<ExpandableListItem> _data = generateItems();
-  String? exercisetype, muscletype;
+  String exercisetype="", muscletype="";
 
   @override
   Widget build(BuildContext context) {
@@ -57,26 +57,24 @@ class DrawerPanelState extends State<DrawerPanel> {
                                   onChanged: (value) {
                                     setState(() {
                                       item.selectedItemIndex = value as int;
-                                      
                                     });
                                     print(
-                                      "Clicked: ${item.headerValue} - $subItem");
+                                        "Clicked: ${item.headerValue} - $subItem");
 
-                                  if (item.headerValue ==
-                                      _data[0].headerValue) {
-                                    setState(() {
-                                      exercisetype = subItem;
-                                    });
-                                  } else if (item.headerValue ==
-                                      _data[1].headerValue) {
-                                    setState(() {
-                                      muscletype = subItem;
-                                    });
-                                  }
+                                    if (item.headerValue ==
+                                        _data[0].headerValue) {
+                                      setState(() {
+                                        exercisetype = subItem;
+                                      });
+                                    } else if (item.headerValue ==
+                                        _data[1].headerValue) {
+                                      setState(() {
+                                        muscletype = subItem;
+                                      });
+                                    }
                                   },
                                 ),
                                 title: Text(subItem),
-                            
                               );
                             }).toList(),
                           ),
@@ -98,12 +96,15 @@ class DrawerPanelState extends State<DrawerPanel> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       onPressed: () {
-                        print("egzersiz tipi" + exercisetype.toString());
-                        print("kas tipi " + muscletype.toString());
+                      
                         fetchContent(exercisetype, muscletype, widget.ctx);
+                         setState(() {
+                          exercisetype = "";
+                          muscletype = "";
+                        });
                         Navigator.of(context).pop();
                       },
-                      child: Text('Apply'),
+                      child: const Text('Apply'),
                     ),
                   ),
                   Container(
@@ -111,10 +112,15 @@ class DrawerPanelState extends State<DrawerPanel> {
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
                       onPressed: () {
-                        fetchContent("", "", widget.ctx);
+                         setState(() {
+                          exercisetype = "";
+                          muscletype = "";
+                        });
+                        fetchContent(exercisetype, muscletype, widget.ctx);
+                       
                         Navigator.of(context).pop();
                       },
-                      child: Text('Clear'),
+                      child:const Text('Clear'),
                     ),
                   ),
                 ],

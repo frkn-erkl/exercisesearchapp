@@ -1,8 +1,11 @@
+
+
+
+
 import 'package:caseapp/components/ListItem.dart';
 import 'package:caseapp/components/drawerPanel.dart';
 import 'package:caseapp/methods/contentget.dart';
-import 'package:caseapp/methods/generateItems.dart';
-import 'package:caseapp/models/ExpandableListItem.dart';
+
 
 import 'package:caseapp/s_management/ExerciseListProvider.dart';
 
@@ -40,10 +43,15 @@ class _DashboardState extends State<Dashboard> {
 
     return Scaffold(
         key: _scaffoldKey,
-        endDrawer: DrawerPanel(ctx: context), //drawermethod(context),
+        endDrawer: DrawerPanel(ctx: context),
         backgroundColor: Colors.grey.shade300,
-        body: providerelement.getItems.isNotEmpty
-            ? CustomScrollView(
+        body: providerelement.getItems.toString()=="null"
+            ? Center(
+                child: CircularProgressIndicator(
+                  
+                  color: Colors.black,
+                )
+              ) : CustomScrollView(
                 slivers: <Widget>[
                   SliverAppBar(
                     automaticallyImplyLeading: false,
@@ -113,6 +121,7 @@ class _DashboardState extends State<Dashboard> {
                                           BorderSide(color: Colors.transparent),
                                     ),
                                     hintText: 'Search',
+                                    contentPadding: EdgeInsets.only(left: 8),
                                     hintStyle: TextStyle(color: Colors.black),
                                   ),
                                   style: TextStyle(color: Colors.black),
@@ -153,11 +162,6 @@ class _DashboardState extends State<Dashboard> {
                   )
                 ],
               )
-            : Center(
-                child: CircularProgressIndicator(
-                  
-                  color: Colors.black,
-                )
-              ));
+            );
   }
 }
