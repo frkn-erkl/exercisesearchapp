@@ -8,7 +8,7 @@ class ExerciseListProvider with ChangeNotifier {
   String? muscleTypeParameter;
 
 
-   List<Map<dynamic, dynamic>>? get getItems {
+   List<Map<dynamic, dynamic>> get getItems {
     return items;
   }
 
@@ -25,7 +25,7 @@ class ExerciseListProvider with ChangeNotifier {
   
 
    void setfilteredItems(List<Map<dynamic, dynamic>> newitems) {
-    items = newitems;
+    filteredItems = newitems;
      notifyListeners();
   }
 

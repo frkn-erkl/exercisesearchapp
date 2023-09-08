@@ -4,8 +4,9 @@ import 'package:caseapp/models/ExpandableListItem.dart';
 
 import 'package:flutter/material.dart';
 
-
 class DrawerPanel extends StatefulWidget {
+  BuildContext ctx;
+  DrawerPanel({required this.ctx});
   @override
   State createState() => DrawerPanelState();
 }
@@ -16,7 +17,6 @@ class DrawerPanelState extends State<DrawerPanel> {
 
   @override
   Widget build(BuildContext context) {
-
     return Drawer(
       child: SafeArea(
         child: CustomScrollView(
@@ -57,14 +57,11 @@ class DrawerPanelState extends State<DrawerPanel> {
                                   onChanged: (value) {
                                     setState(() {
                                       item.selectedItemIndex = value as int;
+                                      
                                     });
-                                  },
-                                ),
-                                title: Text(subItem),
-                                onTap: () {
-                                  print(
+                                    print(
                                       "Clicked: ${item.headerValue} - $subItem");
-                              
+
                                   if (item.headerValue ==
                                       _data[0].headerValue) {
                                     setState(() {
@@ -76,8 +73,10 @@ class DrawerPanelState extends State<DrawerPanel> {
                                       muscletype = subItem;
                                     });
                                   }
-
-                                },
+                                  },
+                                ),
+                                title: Text(subItem),
+                            
                               );
                             }).toList(),
                           ),
@@ -99,11 +98,10 @@ class DrawerPanelState extends State<DrawerPanel> {
                     alignment: Alignment.center,
                     child: ElevatedButton(
                       onPressed: () {
-        
                         print("egzersiz tipi" + exercisetype.toString());
-                         print("kas tipi " + muscletype.toString());
-                        fetchContent(exercisetype, muscletype, context);
-                         Navigator.of(context).pop();
+                        print("kas tipi " + muscletype.toString());
+                        fetchContent(exercisetype, muscletype, widget.ctx);
+                        Navigator.of(context).pop();
                       },
                       child: Text('Apply'),
                     ),
@@ -113,8 +111,8 @@ class DrawerPanelState extends State<DrawerPanel> {
                     alignment: Alignment.bottomCenter,
                     child: ElevatedButton(
                       onPressed: () {
-                         fetchContent(exercisetype, muscletype, context);
-                          Navigator.of(context).pop();
+                        fetchContent("", "", widget.ctx);
+                        Navigator.of(context).pop();
                       },
                       child: Text('Clear'),
                     ),
